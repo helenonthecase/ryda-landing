@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryda — Rider management for live music</title>
+<meta name="description" content="The hospitality rider platform the live music industry has been waiting for. Built for Tour Managers, Artist Liaison teams, and festivals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: #0A0A0A; color: #fff; }
+
+.page-wrap { max-width: 1200px; margin: 0 auto; }
+
+nav { display: flex; align-items: center; justify-content: space-between; padding: 28px 64px; border-bottom: 0.5px solid #1A1A1A; }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-mark { width: 44px; height: 44px; background: #1F1F1F; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-name { font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; color: #fff; }
+.nav-name span { color: #E8FF47; }
+.nav-tag { font-family: 'DM Mono', monospace; font-size: 12px; color: #666; letter-spacing: 0.1em; text-transform: uppercase; background: #111; border: 0.5px solid #1F1F1F; padding: 6px 14px; border-radius: 20px; }
+
+.hero { padding: 100px 64px 60px; max-width: 920px; }
+.hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #E8FF47; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+.eyebrow-dot { width: 6px; height: 6px; background: #E8FF47; border-radius: 50%; }
+.hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 110px; line-height: 0.95; letter-spacing: 0.02em; color: #fff; }
+.hero-h1 span { color: #E8FF47; }
+.hero-h2 { font-family: 'Bebas Neue', sans-serif; font-size: 110px; line-height: 0.95; letter-spacing: 0.02em; color: #222; margin-bottom: 44px; }
+.hero-sub { font-size: 18px; font-weight: 300; color: #888; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+.hero-sub strong { color: #ccc; font-weight: 400; }
+
+.manifesto { background: #111; border: 0.5px solid #1F1F1F; border-left: 2px solid #E8FF47; border-radius: 0 10px 10px 0; padding: 36px 40px; margin: 0 64px 72px; max-width: 720px; }
+.manifesto-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #E8FF47; margin-bottom: 18px; }
+.manifesto-text { font-size: 17px; font-weight: 300; color: #888; line-height: 1.9; }
+.manifesto-text em { color: #ccc; font-style: normal; font-weight: 400; }
+.manifesto-text strong { color: #E8FF47; font-weight: 400; }
+
+.form-section { padding: 0 64px 80px; max-width: 620px; }
+.form-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.03em; color: #fff; margin-bottom: 28px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.form-group { margin-bottom: 14px; }
+label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #666; margin-bottom: 6px; display: block; }
+.optional { color: #333; margin-left: 4px; }
+input[type=text], input[type=email], select {
+  width: 100%; background: #111; border: 0.5px solid #2A2A2A;
+  border-radius: 8px; padding: 13px 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; color: #fff;
+  outline: none; transition: border-color 0.15s; appearance: none;
+}
+input::placeholder { color: #333; }
+input:focus, select:focus { border-color: #E8FF47; }
+select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+select option { background: #111; color: #fff; }
+.submit-btn { width: 100%; background: #E8FF47; color: #0A0A0A; border: none; border-radius: 8px; padding: 17px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 8px; transition: opacity 0.15s; }
+.submit-btn:hover { opacity: 0.88; }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.form-footer { font-family: 'DM Mono', monospace; font-size: 11px; color: #666; letter-spacing: 0.06em; margin-top: 14px; text-align: center; }
+
+.success-state { display: none; background: #111; border: 0.5px solid #1F1F1F; border-radius: 12px; padding: 40px 32px; text-align: center; }
+.success-mark { width: 52px; height: 52px; background: #E8FF47; border-radius: 11px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.success-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #fff; letter-spacing: 0.03em; margin-bottom: 10px; }
+.success-body { font-size: 14px; color: #666; font-weight: 300; line-height: 1.7; }
+
+.features { padding: 20px 64px 100px; }
+.section-eyebrow { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #666; margin-bottom: 32px; }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #1A1A1A; border: 0.5px solid #1A1A1A; border-radius: 12px; overflow: hidden; }
+.feature { background: #0A0A0A; padding: 36px 28px; }
+.feature-num { font-family: 'DM Mono', monospace; font-size: 11px; color: #E8FF47; letter-spacing: 0.1em; margin-bottom: 20px; }
+.feature-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.03em; color: #fff; margin-bottom: 14px; line-height: 1.1; }
+.feature-body { font-size: 14px; font-weight: 300; color: #666; line-height: 1.8; }
+.feature-body strong { color: #999; font-weight: 400; }
+
+.proof { padding: 0 64px 100px; }
+.proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.proof-card { background: #111; border: 0.5px solid #1F1F1F; border-radius: 10px; padding: 24px; }
+.proof-role { font-family: 'DM Mono', monospace; font-size: 10px; color: #E8FF47; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.proof-quote { font-size: 14px; font-weight: 300; color: #666; line-height: 1.7; font-style: italic; }
+
+.footer-cta { padding: 80px 64px; border-top: 0.5px solid #1A1A1A; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.footer-h { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.03em; color: #fff; line-height: 1.1; }
+.footer-h span { color: #E8FF47; }
+.footer-sub { font-size: 14px; color: #666; font-weight: 300; margin-top: 6px; }
+.footer-btn { background: #E8FF47; color: #0A0A0A; border: none; border-radius: 8px; padding: 16px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+.footer-domain { font-family: 'DM Mono', monospace; font-size: 12px; color: #444; text-align: center; padding: 28px 64px; letter-spacing: 0.1em; border-top: 0.5px solid #111; }
+
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  .nav-mark { width: 36px; height: 36px; }
+  .nav-tag { display: none; }
+  .hero { padding: 60px 24px 40px; }
+  .hero-h1, .hero-h2 { font-size: 60px; }
+  .manifesto { margin: 0 24px 48px; padding: 24px 28px; }
+  .form-section { padding: 0 24px 60px; max-width: 100%; }
+  .form-row { grid-template-columns: 1fr; }
+  .features { padding: 20px 24px 60px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .proof { padding: 0 24px 60px; }
+  .proof-grid { grid-template-columns: 1fr; }
+  .footer-cta { padding: 60px 24px; flex-direction: column; align-items: flex-start; }
+  .footer-btn { width: 100%; text-align: center; }
+  .footer-domain { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-mark">
+      <svg width="24" height="24" viewBox="0 0 52 52" fill="none">
+        <circle cx="26" cy="26" r="6" fill="#E8FF47"/>
+        <circle cx="26" cy="26" r="14" stroke="#E8FF47" stroke-width="1.5" fill="none" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="nav-name">ryd<span>a</span></div>
+  </a>
+  <div class="nav-tag">Early access &#8212; 2026</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow"><div class="eyebrow-dot"></div>Now accepting early access</div>
+  <div class="hero-h1">THE RIDER PLATFORM</div>
+  <div class="hero-h1"><span>THE INDUSTRY</span></div>
+  <div class="hero-h2">HAS BEEN WAITING FOR.</div>
+  <p class="hero-sub">Your rider is a document. Their spreadsheet is a rebuild. <strong>Every festival. Every artist. Every time.</strong> Ryda ends that loop &#8212; for Tour Managers, Artist Liaison teams, and the festivals that need readiness to be a given, not a goal.</p>
+</section>
+
+<div class="manifesto">
+  <div class="manifesto-label">The manifesto</div>
+  <div class="manifesto-text">
+    A hospitality rider is more than a list. It&#8217;s how an artist says:
+    <em>this is what we need to give you everything we have tonight.</em><br><br>
+    After weeks on the road, it&#8217;s the brief that tells your AL team
+    how to look after the people who are about to walk on stage.<br><br>
+    So why does it arrive as a PDF that gets manually rebuilt into a
+    spreadsheet before anyone can even start?<br><br>
+    <strong>Ryda makes sure the care that goes into writing a rider
+    is the same care the AL team gets to work from.</strong>
+  </div>
+</div>
+
+<section class="form-section" id="waitlist">
+  <div class="form-title">Get early access</div>
+  <div id="form-wrap">
+    <form id="waitlist-form" method="post" action="https://app.loops.so/api/newsletter-form/cmmxm1iw200aa0i2i8pnga6l8">
+      <div class="form-row">
+        <div><label>First name</label><input type="text" name="firstName" placeholder="Helen" required/></div>
+        <div><label>Last name</label><input type="text" name="lastName" placeholder="Smith" required/></div>
+      </div>
+      <div class="form-group"><label>Email address</label><input type="email" name="email" placeholder="hello@yourcompany.com" required/></div>
+      <div class="form-group">
+        <label>Your role</label>
+        <select name="role" required>
+          <option value="" disabled selected>Select your role</option>
+          <option value="Tour Manager">Tour Manager</option>
+          <option value="Band Assistant">Band Assistant</option>
+          <option value="Artist Manager">Artist Manager</option>
+          <option value="Artist Liaison Manager">Artist Liaison Manager</option>
+          <option value="Rider Manager">Rider Manager</option>
+          <option value="Dressing Room / Backstage Manager">Dressing Room / Backstage Manager</option>
+          <option value="Event Organiser / Festival">Event Organiser / Festival</option>
+          <option value="Production Manager">Production Manager</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>LinkedIn profile <span class="optional">&#8212; optional</span></label><input type="text" name="linkedin" placeholder="linkedin.com/in/yourprofile"/></div>
+      <input type="hidden" name="userGroup" value="Ryda Waitlist"/>
+      <button type="submit" class="submit-btn" id="submit-btn">Get early access to Ryda</button>
+      <div class="form-footer">No spam. No pressure. Just first in line when we launch.</div>
+    </form>
+  </div>
+  <div class="success-state" id="success">
+    <div class="success-mark">
+      <svg width="26" height="26" viewBox="0 0 52 52" fill="none">
+        <circle cx="26" cy="26" r="6" fill="#0A0A0A"/>
+        <circle cx="26" cy="26" r="14" stroke="#0A0A0A" stroke-width="1.5" fill="none" opacity="0.25"/>
+      </svg>
+    </div>
+    <div class="success-title">You&#8217;re on the list.</div>
+    <div class="success-body">We&#8217;ll be in touch before anyone else hears about it.<br>In the meantime &#8212; tell someone who needs this.</div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="section-eyebrow">Why Ryda exists</div>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-num">01</div>
+      <div class="feature-title">One rider. Every format.</div>
+      <div class="feature-body">Tour Managers build the rider once. Ryda delivers it in whatever format the AL team needs &#8212; <strong>structured, searchable, and ready to work from.</strong> No reformatting. No copy-paste. No &#8220;can you send it again in a spreadsheet?&#8221;</div>
+    </div>
+    <div class="feature">
+      <div class="feature-num">02</div>
+      <div class="feature-title">Substitutions that don&#8217;t disappear.</div>
+      <div class="feature-body">AL teams annotate directly in the rider. <strong>Tour Managers approve or reject with one tap.</strong> Every change is logged, timestamped, and traceable. No more chasing approvals through WhatsApp at 11pm the night before show day.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-num">03</div>
+      <div class="feature-title">Budgets that reconcile themselves.</div>
+      <div class="feature-body">Every procurement decision lives in Ryda. Post-show, the numbers are already there &#8212; <strong>per artist, per room, per category.</strong> Reconciliation goes from a day&#8217;s work to a sign-off.</div>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="section-eyebrow">Built for the people who keep shows running</div>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-role">Tour Manager</div>
+      <div class="proof-quote">&#8220;I send the same rider to 12 festivals every summer. Each one asks for it differently. I&#8217;ve been waiting for something like this.&#8221;</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-role">Artist Liaison</div>
+      <div class="proof-quote">&#8220;We&#8217;re rebuilding riders from PDFs into spreadsheets for every single artist. It&#8217;s hours of work before we even start ordering.&#8221;</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-role">Festival Production</div>
+      <div class="proof-quote">&#8220;Budget reconciliation after a festival weekend is a nightmare. If the numbers were already there, it would change everything.&#8221;</div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-cta">
+  <div>
+    <div class="footer-h">Tour Managers get in <span>free.</span></div>
+    <div class="footer-sub">Always. No catch. Built to spread through the industry on merit.</div>
+  </div>
+  <button class="footer-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join the waitlist</button>
+</div>
+
+<div class="footer-domain">ryda.world &#8212; rider management for live music</div>
+
+<script>
+document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  const formData = new FormData(this);
+  try {
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: new URLSearchParams(formData),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
+    if (res.ok) {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Get early access to Ryda';
+      alert('Something went wrong. Please try again.');
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Get early access to Ryda';
+    alert('Something went wrong. Please try again.');
+  }
+});
+</script>
+</body>
+</html>
